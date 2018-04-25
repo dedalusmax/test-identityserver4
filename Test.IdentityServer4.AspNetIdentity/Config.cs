@@ -81,6 +81,23 @@ namespace Test.IdentityServer4.AspNetIdentity
                         "api1"
                     },
                     AllowOfflineAccess = true
+                },
+
+                new Client
+                {
+                    ClientId = "swaggerui",
+                    ClientName = "Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    // location of the client
+                    RedirectUris = { "http://localhost:53753/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:53753/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "api1",
+                    }
                 }
             };
         }

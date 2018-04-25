@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.IdentityServer4.AspNetIdentity", "Test.IdentityServer4.AspNetIdentity\Test.IdentityServer4.AspNetIdentity.csproj", "{7E6EA6CE-4D71-4897-87BE-CE00EFDDB0AD}"
 EndProject
@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.WebAPI", "Test.WebAPI\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.MvcClient", "Test.MvcClient\Test.MvcClient.csproj", "{5C88079A-1F19-43CC-8BFD-83F604118553}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.IdentityServer4.Data", "Test.IdentityServer4.Data\Test.IdentityServer4.Data.csproj", "{B882F2CD-32CA-484D-8CA5-F64FEDE0CEF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.IdentityServer4.Data", "Test.IdentityServer4.Data\Test.IdentityServer4.Data.csproj", "{B882F2CD-32CA-484D-8CA5-F64FEDE0CEF2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.JavaScriptClient", "Test.JavaScriptClient\Test.JavaScriptClient.csproj", "{8E2F48FD-A0E8-460E-B465-062A97CDE67E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.WebAPI.Swagger", "TestWebAPI.Swagger\Test.WebAPI.Swagger.csproj", "{F3528E6E-84B7-4762-B2CD-942A7618A513}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{8E2F48FD-A0E8-460E-B465-062A97CDE67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E2F48FD-A0E8-460E-B465-062A97CDE67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E2F48FD-A0E8-460E-B465-062A97CDE67E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3528E6E-84B7-4762-B2CD-942A7618A513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3528E6E-84B7-4762-B2CD-942A7618A513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3528E6E-84B7-4762-B2CD-942A7618A513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3528E6E-84B7-4762-B2CD-942A7618A513}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
