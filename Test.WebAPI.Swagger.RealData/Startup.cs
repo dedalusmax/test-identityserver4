@@ -80,7 +80,7 @@ namespace Test.WebAPI.Swagger.RealData
                          TokenUrl = identityUrl + "/connect/token",
                          Scopes = new Dictionary<string, string>()
                          {
-                             { "api:admin", "My API" }
+                             { "api:admin", "Admin API" }
                          }
                      });
 
@@ -102,6 +102,8 @@ namespace Test.WebAPI.Swagger.RealData
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
+                c.OAuthClientId("adminswaggerui");
+                c.OAuthAppName("Admin Swagger UI");
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 

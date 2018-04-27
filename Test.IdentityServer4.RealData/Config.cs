@@ -69,8 +69,8 @@ namespace Test.IdentityServer4.RealData
                     ClientName = "Admin Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
-                    RedirectUris = { "http://localhost:51989/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { "http://localhost:51989/swagger/" },
+                    RedirectUris = { "http://localhost:50641/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:50641/swagger/" },
 
                     AllowedScopes =
                     {
