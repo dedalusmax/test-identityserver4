@@ -15,6 +15,7 @@ namespace Test.IdentityServer4.AspNetIdentity
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+               new IdentityResources.Email { Required = true }
             };
         }
 
@@ -97,6 +98,26 @@ namespace Test.IdentityServer4.AspNetIdentity
                     AllowedScopes =
                     {
                         "api1",
+                    }
+                },
+
+                 new Client
+                {
+                    ClientId = "js_angular_admin",
+                    ClientName = "Angular Admin JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { "http://localhost:4203/login" },
+                    PostLogoutRedirectUris = { "http://localhost:4203" },
+                    AllowedCorsOrigins = { "http://localhost:4203" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api1"
                     }
                 }
             };
