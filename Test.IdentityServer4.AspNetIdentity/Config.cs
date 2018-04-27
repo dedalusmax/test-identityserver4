@@ -15,7 +15,7 @@ namespace Test.IdentityServer4.AspNetIdentity
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-               new IdentityResources.Email { Required = true }
+                new IdentityResources.Email { Required = true }
             };
         }
 
