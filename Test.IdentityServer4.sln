@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.MvcClient.Login", "Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.IdentityServer4.Login", "Test.IdentityServer4.Login\Test.IdentityServer4.Login.csproj", "{313F0ADA-B3D3-4560-8128-52EB06A0A954}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.WebAPI.Swagger.RealData", "Test.WebAPI.Swagger.RealData\Test.WebAPI.Swagger.RealData.csproj", "{C2F24A1A-57C1-4264-A4C0-0996137F0B56}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.IdentityServer4.RealData", "Test.IdentityServer4.RealData\Test.IdentityServer4.RealData.csproj", "{ACC063DF-F798-4E18-95FC-4CFCEB91776E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,14 @@ Global
 		{F3528E6E-84B7-4762-B2CD-942A7618A513}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3528E6E-84B7-4762-B2CD-942A7618A513}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3528E6E-84B7-4762-B2CD-942A7618A513}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2F24A1A-57C1-4264-A4C0-0996137F0B56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2F24A1A-57C1-4264-A4C0-0996137F0B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2F24A1A-57C1-4264-A4C0-0996137F0B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2F24A1A-57C1-4264-A4C0-0996137F0B56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC063DF-F798-4E18-95FC-4CFCEB91776E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC063DF-F798-4E18-95FC-4CFCEB91776E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC063DF-F798-4E18-95FC-4CFCEB91776E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC063DF-F798-4E18-95FC-4CFCEB91776E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1380DA7-B8F3-4447-A709-FA29D1AE7461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1380DA7-B8F3-4447-A709-FA29D1AE7461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1380DA7-B8F3-4447-A709-FA29D1AE7461}.Release|Any CPU.ActiveCfg = Release|Any CPU
