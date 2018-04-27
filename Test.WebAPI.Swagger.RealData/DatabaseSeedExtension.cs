@@ -2,9 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Test.IdentityServer4.Data;
 
 namespace Test.WebAPI.Swagger.RealData

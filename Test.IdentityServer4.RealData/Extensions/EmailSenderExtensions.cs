@@ -1,8 +1,7 @@
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Test.IdentityServer4.RealData.Services;
 
-namespace Test.IdentityServer4.AspNetIdentity.RealData.Services
+namespace Test.IdentityServer4.RealData.Services
 {
     public static class EmailSenderExtensions
     {
