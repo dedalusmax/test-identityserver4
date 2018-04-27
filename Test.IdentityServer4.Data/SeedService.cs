@@ -11,9 +11,9 @@ namespace Test.IdentityServer4.Data
     {
         private readonly IDatabaseScope _database;
         private readonly UserManager<Entities.User> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<Entities.Role> _roleManager;
 
-        public SeedService(IDatabaseScope database, UserManager<Entities.User> userManager, RoleManager<IdentityRole> roleManager)
+        public SeedService(IDatabaseScope database, UserManager<Entities.User> userManager, RoleManager<Entities.Role> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
