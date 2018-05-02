@@ -5,12 +5,14 @@ using Test.IdentityServer4.Data.Interfaces;
 
 namespace Test.IdentityServer4.Data
 {
-    public class DatabaseContext : IdentityDbContext, IReadOnlyDatabaseContext
+    public class DatabaseContext : IdentityDbContext<ApplicationUser>, IReadOnlyDatabaseContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
         }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         public DbSet<Organisation> Organisations { get; set; }
 

@@ -6,10 +6,10 @@ namespace Test.IdentityServer4.Data
     public class SeedService
     {
         private readonly IDatabaseScope _database;
-        private readonly UserManager<Entities.User> _userManager;
+        private readonly UserManager<Entities.ApplicationUser> _userManager;
         private readonly RoleManager<Entities.Role> _roleManager;
 
-        public SeedService(IDatabaseScope database, UserManager<Entities.User> userManager, RoleManager<Entities.Role> roleManager)
+        public SeedService(IDatabaseScope database, UserManager<Entities.ApplicationUser> userManager, RoleManager<Entities.Role> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -40,7 +40,7 @@ namespace Test.IdentityServer4.Data
         {
             if (_userManager.FindByNameAsync("admin").Result == null)
             {
-                Entities.User user = new Entities.User
+                Entities.ApplicationUser user = new Entities.ApplicationUser
                 {
                     UserName = "admin@test.eu",
                     Email = "admin@test.eu",

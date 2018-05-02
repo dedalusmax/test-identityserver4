@@ -8,17 +8,17 @@ namespace Test.WebAPI.Swagger.RealData
     {
         public static void Main(string[] args)
         {
-            Console.Title = "API";
+            //Console.Title = "API";
 
-            var host = BuildWebHost(args);
+            //var host = BuildWebHost(args);
 
-            //SeedData.EnsureSeedData(host.Services);
+            ////SeedData.EnsureSeedData(host.Services);
 
-            host.Run();
+            //host.Run();
 
-            //BuildWebHost(args)
-            //    .SeedDatabase()
-            //    .Run();
+            BuildWebHost(args)
+                .SeedDatabase()
+                .Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

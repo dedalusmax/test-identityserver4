@@ -29,7 +29,7 @@ namespace Test.IdentityServer4.RealData
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // work on User
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders();
 
@@ -60,7 +60,7 @@ namespace Test.IdentityServer4.RealData
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients())
-                .AddAspNetIdentity<User>();
+                .AddAspNetIdentity<ApplicationUser>();
 
             // adds "serious" certificate. See Dink's Certificate.cs
             //builder.AddSigningCredential(Certificate.Get());

@@ -13,7 +13,7 @@ namespace Test.IdentityServer4.Data.Entities
 
         public long UserId { get; set; }
 
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
 
         public MembershipPermission Permission { get; set; }
 

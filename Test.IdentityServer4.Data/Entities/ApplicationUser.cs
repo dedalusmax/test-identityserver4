@@ -6,15 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Test.IdentityServer4.Data.Entities
 {
     [Table("Users")]
-    public class User : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
-        //[ForeignKey("Enterprise")]
-        //public Guid? EnterpriseId { get; set; }
-
         [StringLength(255)]
         public string PasswordSalt { get; set; }
-
-        //public virtual Enterprise Enterprise { get; set; }
 
         [StringLength(255)]
         public string PasswordResetCode { get; set; }

@@ -6,9 +6,8 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using Test.IdentityServer4.Data;
-using Test.IdentityServer4.Data.Entities;
 
-namespace Test.IdentityServer4.RealData
+namespace Test.WebAPI.Swagger.RealData
 {
     public class SeedData
     {
@@ -19,7 +18,7 @@ namespace Test.IdentityServer4.RealData
                 var context = scope.ServiceProvider.GetService<DatabaseContext>();
                 context.Database.Migrate();
 
-                var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+                var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<IdentityServer4.Data.Entities.ApplicationUser>>();
                 /*
                 var gunnie = userMgr.FindByEmailAsync("gunther@zgunnie.com").Result;
                 if (gunnie != null)
@@ -33,7 +32,7 @@ namespace Test.IdentityServer4.RealData
                 var alice = userMgr.FindByNameAsync("alice").Result;
                 if (alice == null)
                 {
-                    alice = new User
+                    alice = new IdentityServer4.Data.Entities.ApplicationUser
                     {
                         UserName = "alice"
                     };
@@ -68,7 +67,7 @@ namespace Test.IdentityServer4.RealData
                 var bob = userMgr.FindByNameAsync("bob").Result;
                 if (bob == null)
                 {
-                    bob = new User
+                    bob = new IdentityServer4.Data.Entities.ApplicationUser
                     {
                         UserName = "bob"
                     };

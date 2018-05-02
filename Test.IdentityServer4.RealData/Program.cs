@@ -7,11 +7,8 @@ namespace Test.IdentityServer4.RealData
     {
         public static void Main(string[] args)
         {
-            var host = BuildWebHost(args);
-            
-            SeedData.EnsureSeedData(host.Services);
-
-            host.Run();
+            BuildWebHost(args)
+                .Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

@@ -6,9 +6,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Test.IdentityServer4.RealData.Services;
 using Test.IdentityServer4.RealData.Models;
 using Test.IdentityServer4.RealData.Models.AccountViewModels;
+using Test.IdentityServer4.RealData.Services;
 
 namespace Test.IdentityServer4.RealData.Controllers
 {
