@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Test.IdentityServer4.NoData.Models;
+using Test.IdentityServer4.Data.Entities;
 using Test.IdentityServer4.NoData.Models.AccountViewModels;
 using Test.IdentityServer4.NoData.Services;
 

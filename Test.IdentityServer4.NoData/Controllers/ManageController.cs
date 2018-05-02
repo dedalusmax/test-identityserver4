@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Test.IdentityServer4.NoData.Models;
+using Test.IdentityServer4.Data.Entities;
 using Test.IdentityServer4.NoData.Models.ManageViewModels;
 using Test.IdentityServer4.NoData.Services;
 

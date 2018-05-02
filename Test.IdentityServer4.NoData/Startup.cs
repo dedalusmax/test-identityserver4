@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Test.IdentityServer4.Data;
-using Test.IdentityServer4.NoData.Models;
+using Test.IdentityServer4.Data.Entities;
 using Test.IdentityServer4.NoData.Services;
 
 namespace Test.IdentityServer4.NoData

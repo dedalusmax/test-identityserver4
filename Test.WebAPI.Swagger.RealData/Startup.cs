@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
 using Test.IdentityServer4.Data;
+using Test.IdentityServer4.Data.Entities;
 
 namespace Test.WebAPI.Swagger.RealData
 {
@@ -46,9 +48,9 @@ namespace Test.WebAPI.Swagger.RealData
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // ASP identity thingy
-            //services.AddIdentity<User, IdentityRole>()
-            //    .AddEntityFrameworkStores<DatabaseContext>()
-            //    .AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<DatabaseContext>()
+                .AddDefaultTokenProviders();
 
             //services.AddAuthentication("Bearer")
             //    .AddIdentityServerAuthentication(options =>
