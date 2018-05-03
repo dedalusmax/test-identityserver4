@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.IdentityServer4.Login"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.WebAPI.Swagger.RealData", "Test.WebAPI.Swagger.RealData\Test.WebAPI.Swagger.RealData.csproj", "{C2F24A1A-57C1-4264-A4C0-0996137F0B56}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.IdentityServer4.RealData", "Test.IdentityServer4.RealData\Test.IdentityServer4.RealData.csproj", "{ACC063DF-F798-4E18-95FC-4CFCEB91776E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.WebAPI.Swagger", "Test.WebAPI.Swagger\Test.WebAPI.Swagger.csproj", "{8A6550A3-8E94-4FC4-B9D6-6E0CC618F4DA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.IdentityServer4.NoData", "Test.IdentityServer4.NoData\Test.IdentityServer4.NoData.csproj", "{CFB116CD-7C12-4577-8580-FA38E929517B}"
@@ -57,10 +55,6 @@ Global
 		{C2F24A1A-57C1-4264-A4C0-0996137F0B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2F24A1A-57C1-4264-A4C0-0996137F0B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2F24A1A-57C1-4264-A4C0-0996137F0B56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ACC063DF-F798-4E18-95FC-4CFCEB91776E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACC063DF-F798-4E18-95FC-4CFCEB91776E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACC063DF-F798-4E18-95FC-4CFCEB91776E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACC063DF-F798-4E18-95FC-4CFCEB91776E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A6550A3-8E94-4FC4-B9D6-6E0CC618F4DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A6550A3-8E94-4FC4-B9D6-6E0CC618F4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A6550A3-8E94-4FC4-B9D6-6E0CC618F4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
