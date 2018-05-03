@@ -23,8 +23,8 @@ var config = {
     client_id: "js_demo",
     redirect_uri: "http://localhost:5003/callback.html",
     response_type: "id_token token",
-    scope: "openid profile email api1",
-    post_logout_redirect_uri : "http://localhost:5003/index.html",
+    scope: "openid profile email api:admin",
+    post_logout_redirect_uri: "http://localhost:5003/index.html",
 };
 var mgr = new Oidc.UserManager(config);
 
@@ -43,6 +43,7 @@ function login() {
 
 function api() {
     mgr.getUser().then(function (user) {
+
         
         var url = "http://localhost:5001/api/v1/identity";
 

@@ -23,7 +23,7 @@ namespace Test.IdentityServer4.Login
         {
             return new List<ApiResource>
             {
-                new ApiResource("api1", "My API")
+                new ApiResource("api:admin", "My API")
             };
         }
 
@@ -39,17 +39,18 @@ namespace Test.IdentityServer4.Login
                     ClientName = "Demo JavaScript Client",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
+                    RequireConsent = false,
 
                     RedirectUris = { "http://localhost:5003/callback.html" },
                     PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
                     AllowedCorsOrigins = { "http://localhost:5003" },
-
+                    
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        "api1"
+                        "api:admin"
                     }
                 },
 
@@ -81,18 +82,18 @@ namespace Test.IdentityServer4.Login
 
                 new Client
                 {
-                    ClientId = "swaggerui",
-                    ClientName = "Swagger UI",
+                    ClientId = "adminswaggerui",
+                    ClientName = "Admin Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
                     // location of the client
                     RedirectUris = { "http://localhost:5001/swagger/oauth2-redirect.html" },
                     PostLogoutRedirectUris = { "http://localhost:5001/swagger/" },
-
+                    AllowedCorsOrigins = { "*" },
                     AllowedScopes =
                     {
-                        "api1",
+                        "api:admin",
                     }
                 },
 

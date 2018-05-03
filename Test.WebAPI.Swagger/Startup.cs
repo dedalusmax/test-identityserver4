@@ -8,6 +8,9 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace Test.WebAPI.Swagger
 {
@@ -19,55 +22,6 @@ namespace Test.WebAPI.Swagger
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddCors();
-
-            services.AddMvcCore()
-                .AddAuthorization()
-                .AddJsonFormatters();
-
-            services.AddAuthentication(o =>
-            {
-                o.DefaultScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-                o.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-            })
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = "http://localhost:5000";
-                    options.RequireHttpsMetadata = false;
-                    options.ApiName = "api1";
-                    options.RequireHttpsMetadata = false;
-                    options.SupportedTokens = SupportedTokens.Both;
-                });
-
-            // Register the Swagger generator, defining one or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                //c.OperationFilter<FileUploadOperationFilter>();
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-                c.AddSecurityDefinition(
-                    "oauth2",
-                     new OAuth2Scheme
-                     {
-                         Type = "oauth2",
-                         Flow = "implicit",
-                         AuthorizationUrl = "http://localhost:5000/connect/authorize",
-                         TokenUrl = "http://localhost:5000/connect/token",
-                         Scopes = new Dictionary<string, string>()
-                         {
-                             { "api1", "My API" }
-                         }
-                     });
-
-                c.OperationFilter<AuthorizeCheckOperationFilter>();
-                c.DescribeAllEnumsAsStrings();
-            });
-
-            services.AddMvc();
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -81,9 +35,9 @@ namespace Test.WebAPI.Swagger
             app.UseSwaggerUI(c =>
             {
                 c.DocExpansion(DocExpansion.None);
-                c.OAuthClientId("swaggerui");
-                c.OAuthAppName("Swagger UI");
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.OAuthClientId("adminswaggerui");
+                c.OAuthAppName("Admin Swagger UI");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
             });
 
             if (env.IsDevelopment())
@@ -99,6 +53,64 @@ namespace Test.WebAPI.Swagger
             });
 
             app.UseMvc();
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddCors();
+
+            services
+                .AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
+
+            services.AddAuthorization();
+
+            services.AddAuthentication(o =>
+            {
+                o.DefaultScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
+                o.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
+            })
+                .AddIdentityServerAuthentication(options =>
+                {
+                    var config = Configuration.GetSection("IdentityServer");
+                    var identityUrl = config["Url"];
+                    options.Authority = identityUrl;
+                    options.ApiName = "api:admin";
+                    options.RequireHttpsMetadata = false;
+                    options.SupportedTokens = SupportedTokens.Both;
+                });
+
+            // Register the Swagger generator, defining one or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                var config = Configuration.GetSection("IdentityServer");
+                var identityUrl = config["Url"];
+
+                //c.OperationFilter<FileUploadOperationFilter>();
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.AddSecurityDefinition(
+                    "oauth2",
+                     new OAuth2Scheme
+                     {
+                         Type = "oauth2",
+                         Flow = "implicit",
+                         AuthorizationUrl = identityUrl + "/connect/authorize",
+                         TokenUrl = identityUrl + "/connect/token",
+                         Scopes = new Dictionary<string, string>()
+                         {
+                             { "api:admin", "Admin API" }
+                         }
+                     });
+
+                c.OperationFilter<AuthorizeCheckOperationFilter>();
+                c.DescribeAllEnumsAsStrings();
+            });
+
+            services.AddMvc();
         }
     }
 }
