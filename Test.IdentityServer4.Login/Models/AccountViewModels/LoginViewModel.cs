@@ -7,7 +7,6 @@ namespace Test.IdentityServer4.Login.Models.AccountViewModels
         [Required]
         public string Username { get; set; }
 
-        [Required]
         [EmailAddress]
         public string Email { get; set; }
 
