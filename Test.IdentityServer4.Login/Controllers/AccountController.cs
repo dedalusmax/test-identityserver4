@@ -74,7 +74,7 @@ namespace Test.IdentityServer4.Login.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Wrong username or password.");
                     return View(model);
                 }
             }
