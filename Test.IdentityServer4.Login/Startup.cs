@@ -64,7 +64,6 @@ namespace Test.IdentityServer4.Login
 
             app.UseStaticFiles();
 
-            // app.UseAuthentication(); // not needed, since UseIdentityServer adds the authentication middleware
             app.UseIdentityServer();
 
             app.UseMvc(routes =>
