@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using IdentityServer4.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -35,20 +36,17 @@ namespace Test.IdentityServer4.NoData
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders();
 
-            // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
-
             services.AddMvc();
 
-            // don't know if it's needed
-            //services.Configure<IISOptions>(iis =>
-            //{
-            //    iis.AuthenticationDisplayName = "Windows";
-            //    iis.AutomaticAuthentication = false;
-            //});
+            services.Configure<IISOptions>(iis =>
+            {
+                iis.AuthenticationDisplayName = "Windows";
+                iis.AutomaticAuthentication = false;
+            });
 
-            // what's that?
-            //services.AddTransient<ILoginService<User>, EFLoginService>();
+            // Add application services.
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ILoginService<ApplicationUser>, EfLoginService>();
 
             var builder = services.AddIdentityServer(options =>
             {
@@ -67,7 +65,7 @@ namespace Test.IdentityServer4.NoData
             // adds "serious" certificate. See Dink's Certificate.cs
             //builder.AddSigningCredential(Certificate.Get());
 
-            //builder.Services.AddTransient<IProfileService, ProfileService>();
+            builder.Services.AddTransient<IProfileService, ProfileService>();
 
             //if (this.Environment.IsDevelopment())
             //{
@@ -77,25 +75,6 @@ namespace Test.IdentityServer4.NoData
             //{
             //    throw new Exception("need to configure key material");
             //}
-
-            // add third-party providers
-            //services.AddAuthentication()
-            //  .AddGoogle(options =>
-            //  {
-            //      var config = Configuration.GetSection("GoogleAuth");
-            //      options.ClientId = config["GoogleClientId"];
-            //      options.ClientSecret = config["GoogleClientSecret"];
-            //      options.ClaimActions.MapJsonSubKey(IdentityModel.JwtClaimTypes.GivenName, "name", "givenName");
-            //      options.ClaimActions.MapJsonSubKey(IdentityModel.JwtClaimTypes.FamilyName, "name", "familyName");
-            //  })
-            //  .AddSaml2("dink-okta", "Okta", options =>
-            //  {
-            //      // options.SignInScheme = IdentityServer4.IdentityServerConstants.ExternalCookieAuthenticationScheme;
-            //      // Okta is the default SAML2 provider for now, so no need to set the ModulePath. That default path is /Saml2
-            //      options.SPOptions.EntityId = new Saml2NameIdentifier("http://localhost:5000/Saml2");
-            //      var idp = GetOktaIdentityProvider(options.SPOptions, string.Empty, string.Empty);
-            //      options.IdentityProviders.Add(idp);
-            //  });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -113,6 +92,8 @@ namespace Test.IdentityServer4.NoData
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseIdentityServer();
 
