@@ -35,27 +35,22 @@ namespace Test.IdentityServer4.Login
             {
                 new Client
                 {
-                    ClientId = "client",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    ClientId = "js_demo",
+                    ClientName = "Demo JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
 
-                    ClientSecrets =
+                    RedirectUris = { "http://localhost:5003/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
+                    AllowedCorsOrigins = { "http://localhost:5003" },
+
+                    AllowedScopes =
                     {
-                        new Secret("secret".Sha256())
-                    },
-                    AllowedScopes = { "api1" }
-                },
-
-                // resource owner password grant client
-                new Client
-                {
-                    ClientId = "ro.client",
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-
-                    ClientSecrets =
-                    {
-                        new Secret("secret".Sha256())
-                    },
-                    AllowedScopes = { "api1" }
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api1"
+                    }
                 },
 
                 // OpenID Connect hybrid flow and client credentials client (MVC)
@@ -92,8 +87,8 @@ namespace Test.IdentityServer4.Login
                     AllowAccessTokensViaBrowser = true,
 
                     // location of the client
-                    RedirectUris = { "http://localhost:53753/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { "http://localhost:53753/swagger/" },
+                    RedirectUris = { "http://localhost:5001/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5001/swagger/" },
 
                     AllowedScopes =
                     {
