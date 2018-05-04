@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.WebAPI.Swagger", "Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.IdentityServer4.NoData", "Test.IdentityServer4.NoData\Test.IdentityServer4.NoData.csproj", "{CFB116CD-7C12-4577-8580-FA38E929517B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.IdentityServer4.SqlCustomData", "Test.IdentityServer4.SqlCustomData\Test.IdentityServer4.SqlCustomData.csproj", "{5CCB60B8-636B-4B78-956D-C71A805EC56A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{CFB116CD-7C12-4577-8580-FA38E929517B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFB116CD-7C12-4577-8580-FA38E929517B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFB116CD-7C12-4577-8580-FA38E929517B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CCB60B8-636B-4B78-956D-C71A805EC56A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CCB60B8-636B-4B78-956D-C71A805EC56A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CCB60B8-636B-4B78-956D-C71A805EC56A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CCB60B8-636B-4B78-956D-C71A805EC56A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
