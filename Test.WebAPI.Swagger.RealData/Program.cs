@@ -9,16 +9,9 @@ namespace Test.WebAPI.Swagger.RealData
         public static void Main(string[] args)
         {
             Console.Title = "API";
-
-            var host = BuildWebHost(args);
-
-            SeedData.EnsureSeedData(host.Services);
-
-            host.Run();
-
-            //BuildWebHost(args)
-            //    .SeedDatabase()
-            //    .Run();
+            BuildWebHost(args)
+                .SeedDatabase()
+                .Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

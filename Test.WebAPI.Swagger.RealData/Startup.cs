@@ -1,17 +1,15 @@
 ﻿using IdentityServer4.AccessTokenValidation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
-using Test.IdentityServer4.Data;
-using Test.IdentityServer4.Data.Entities;
+using Test.Data;
+using Test.Data.Entities;
 
 namespace Test.WebAPI.Swagger.RealData
 {
@@ -27,51 +25,43 @@ namespace Test.WebAPI.Swagger.RealData
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Register DB contexts
-            services.AddDbContext<DatabaseContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddCors();
 
             services
-                .AddMvcCore()
-                .AddAuthorization()
-                .AddJsonFormatters();
+                .AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
 
-            services.AddAuthorization(options =>
+            services.AddAuthorization();
+
+            services.AddAuthentication(o =>
             {
-                DefineAuthorizationPolicies(options);
-            });
+                o.DefaultScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
+                o.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
+            })
+                .AddIdentityServerAuthentication(options =>
+                {
+                    var config = Configuration.GetSection("IdentityServer");
+                    var identityUrl = config["Url"];
+                    options.Authority = identityUrl;
+                    options.ApiName = "api:admin";
+                    options.RequireHttpsMetadata = false;
+                    options.SupportedTokens = SupportedTokens.Both;
+                });
 
-            //services.AddAutoMapper();
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-            // ASP identity thingy
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<DatabaseContext>()
-                .AddDefaultTokenProviders();
-
-            //services.AddAuthentication("Bearer")
-            //    .AddIdentityServerAuthentication(options =>
-            //    {
-            //        options.Authority = "http://localhost:5000";
-            //        options.RequireHttpsMetadata = false;
-
-            //        options.ApiName = "api:admin";
-            //    });
-
-            ConfigureAuthService(services);
+            ConfigureDataRepositories(services);
+            ConfigureBusinessServices(services);
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                //c.OperationFilter<FileUploadOperationFilter>();
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-
                 var config = Configuration.GetSection("IdentityServer");
                 var identityUrl = config["Url"];
 
+                //c.OperationFilter<FileUploadOperationFilter>();
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
                 c.AddSecurityDefinition(
                     "oauth2",
                      new OAuth2Scheme
@@ -94,9 +84,12 @@ namespace Test.WebAPI.Swagger.RealData
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, AppDbContext dbContext)
         {
             app.UseAuthentication();
+
+            // automatic migration on the target database
+            dbContext.Database.Migrate();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -104,9 +97,10 @@ namespace Test.WebAPI.Swagger.RealData
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
+                c.DocExpansion(DocExpansion.None);
                 c.OAuthClientId("adminswaggerui");
                 c.OAuthAppName("Admin Swagger UI");
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
             });
 
             if (env.IsDevelopment())
@@ -121,44 +115,33 @@ namespace Test.WebAPI.Swagger.RealData
                 options.AllowAnyHeader();
             });
 
-            //app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
-            //{
-            //    Authority = "http://localhost:5000",
-            //    RequireHttpsMetadata = false,
-
-            //    ApiName = "api:admin",
-            //});
-
-            //app.UseAuthentication();
-
             app.UseMvc();
         }
 
-        private static void DefineAuthorizationPolicies(AuthorizationOptions options)
+        private void ConfigureDataRepositories(IServiceCollection services)
         {
-            //options.AddPolicy(SecurityConsts.POLICY_REQUIRE_SUPER_ADMIN_ROLE, policy => policy.RequireRole(SecurityConsts.ROLE_SUPER_ADMIN));
-            //options.AddPolicy(SecurityConsts.POLICY_REQUIRE_ENTERPRISE_ADMIN_ROLE, policy => policy.RequireRole(SecurityConsts.ROLE_ENTERPRISE_ADMIN));
-            //options.AddPolicy(SecurityConsts.POLICY_REQUIRE_USER_ROLE, policy => policy.RequireRole(SecurityConsts.ROLE_USER));
+            // Register DB contexts
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AppDB")));
+
+            // Register database scope
+            services.AddScoped<IDatabaseScope, AppDatabaseScope>();
+
+            // Register repositories
+            services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
+            services.AddScoped<IGenericRepository<Role>, GenericRepository<Role>>();
         }
 
-        private void ConfigureAuthService(IServiceCollection services)
+        private void ConfigureBusinessServices(IServiceCollection services)
         {
-            services.AddAuthentication(o =>
-            {
-                o.DefaultScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-                o.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-            })
-                .AddIdentityServerAuthentication(o =>
-                {
-                    var config = Configuration.GetSection("IdentityServer");
-                    var identityUrl = config["Url"];
-                    o.Authority = identityUrl;
-                    o.ApiName = "api:admin";
-                    o.RequireHttpsMetadata = false;
-                    o.SupportedTokens = SupportedTokens.Both;
+            //services.AddSingleton<CryptographyService>();
 
-                    // o.EnableCaching = true;
-                });
+            //services.AddScoped<AuthenticationService>();
+            //services.AddScoped<UserService>();
+            //services.AddScoped<RoleService>();
+            //services.AddScoped<AuditService>();
+            //services.AddScoped<EmailService>();
+            //services.AddScoped<SmsService>();
+            //services.AddScoped<OrganisationService>();
         }
     }
 }
