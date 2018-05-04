@@ -59,8 +59,9 @@ namespace Test.IdentityServer4.SqlCustomData
                     ClientName = "Admin Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
-                    RedirectUris = { "http://localhost:51989/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { "http://localhost:51989/swagger/" },
+                    //AllowedCorsOrigins = { "*" },
+                    RedirectUris = { "http://localhost:5001/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5001/swagger/" },
 
                     AllowedScopes =
                     {
