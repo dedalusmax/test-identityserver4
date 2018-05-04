@@ -113,7 +113,7 @@ namespace Test.IdentityServer4.Login
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        "api1"
+                        "api:admin"
                     }
                 }
             };
