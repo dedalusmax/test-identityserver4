@@ -71,12 +71,32 @@ namespace Test.IdentityServer4.SqlCustomData
 
                 new Client
                 {
+                    ClientId = "js_demo",
+                    ClientName = "Demo JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { "http://localhost:5003/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
+                    AllowedCorsOrigins = { "http://localhost:5003" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api:system"
+                    }
+                },
+
+                new Client
+                {
                     ClientId = "js_angular_admin",
                     ClientName = "Angular Admin JavaScript Client",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { "http://localhost:4203/home" },
+                    RedirectUris = { "http://localhost:4203/login" },
                     PostLogoutRedirectUris = { "http://localhost:4203" },
                     AllowedCorsOrigins = { "http://localhost:4203" },
 
