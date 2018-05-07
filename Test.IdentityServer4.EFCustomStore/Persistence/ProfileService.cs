@@ -1,21 +1,39 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4.Extensions;
+using IdentityServer4.Models;
 using IdentityServer4.Services;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Test.IdentityServer4.EFCustomStore.Persistence
 {
     public class ProfileService : IProfileService
     {
-        public Task GetProfileDataAsync(ProfileDataRequestContext context)
-        {
-            context.IssuedClaims.AddRange(context.Subject.Claims);
+        protected readonly IUserStore _userstore;
 
-            return Task.FromResult(0);
+        public ProfileService(IUserStore injectedUserStore)
+        {
+            _userstore = injectedUserStore;
         }
 
-        public Task IsActiveAsync(IsActiveContext context)
+        public virtual async Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
-            return Task.FromResult(0);
+            if (context.RequestedClaimTypes.Any())
+            {
+                var user = await _userstore.FindBySubjectId(context.Subject.GetSubjectId());
+                if (user != null)
+                {
+                    context.AddRequestedClaims(user.Claims);
+                }
+            }
+            return;
         }
+
+        public virtual async Task IsActiveAsync(IsActiveContext context)
+        {
+            var user = await _userstore.FindBySubjectId(context.Subject.GetSubjectId());
+            context.IsActive = !(user is null); // TODO check indicators like account status
+            return;
+        }
+
     }
 }

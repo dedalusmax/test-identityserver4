@@ -2,9 +2,9 @@
 using System.Linq;
 using Test.Data;
 using Test.Data.Entities;
-using Test.WebAPI.Swagger.RealData.Services;
+using Test.Library.Services;
 
-namespace Test.WebAPI.Swagger.RealData.Services
+namespace Test.Library
 {
     public static class DbInitializer
     {

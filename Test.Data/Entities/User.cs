@@ -1,10 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Test.Data.Entities
 {
     public class User : IEntity
     {
+        public User()
+        {
+            Claims = new List<System.Security.Claims.Claim>();
+        }
+
         [Key]
         public long Id { get; set; }
 
@@ -39,9 +45,20 @@ namespace Test.Data.Entities
 
         [Required]
         public bool IsActive { get; set; }
-    }
 
-    public enum Language
+        [Required]
+        public string SubjectId { get; set; }
+
+        [Required]
+        public string ProviderName { get; set; }
+
+        [Required]
+        public string ProviderSubjectId { get; set; }
+
+        public virtual List<System.Security.Claims.Claim> Claims { get; set; }
+}
+
+public enum Language
     {
         English = 1,
         German = 2,

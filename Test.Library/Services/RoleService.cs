@@ -1,6 +1,6 @@
 ﻿using Entities = Test.Data.Entities;
 
-namespace Test.WebAPI.Swagger.RealData.Services
+namespace Test.Library.Services
 {
     public class RoleService
     {

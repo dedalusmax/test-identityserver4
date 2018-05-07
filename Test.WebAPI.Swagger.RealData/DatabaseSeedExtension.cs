@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using Test.Data;
-using Test.WebAPI.Swagger.RealData.Services;
+using Test.Library;
 
 namespace Test.WebAPI.Swagger.RealData
 {

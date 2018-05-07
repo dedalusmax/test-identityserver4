@@ -1,9 +1,13 @@
 using IdentityServer4;
+using IdentityServer4.Stores;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Test.Data;
+using Test.Data.Entities;
 using Test.IdentityServer4.EFCustomStore.Persistence;
 
 namespace Test.IdentityServer4.EFCustomStore
@@ -22,6 +26,8 @@ namespace Test.IdentityServer4.EFCustomStore
         {
             services.AddMvc();
 
+            ConfigureDataRepositories(services);
+
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
@@ -29,8 +35,8 @@ namespace Test.IdentityServer4.EFCustomStore
                 .AddInMemoryClients(Config.GetClients())
                 .AddProfileService<ProfileService>();
 
-            //services.AddSingleton<IUserStore, UserStore>();
-            //services.AddTransient<IPersistedGrantStore, PersistedGrantStore>();
+            services.AddSingleton<IUserStore, UserStore>();
+            services.AddTransient<IPersistedGrantStore, PersistedGrantStore>();
 
             services.AddAuthentication()
                 .AddGoogle("Google", options =>
@@ -64,6 +70,19 @@ namespace Test.IdentityServer4.EFCustomStore
 
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+        }
+
+        private void ConfigureDataRepositories(IServiceCollection services)
+        {
+            // Register DB contexts
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AppDB")));
+
+            // Register database scope
+            services.AddScoped<IDatabaseScope, AppDatabaseScope>();
+
+            // Register repositories
+            services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
+            services.AddScoped<IGenericRepository<Role>, GenericRepository<Role>>();
         }
     }
 }

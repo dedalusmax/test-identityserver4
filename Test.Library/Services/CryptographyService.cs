@@ -2,7 +2,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Test.WebAPI.Swagger.RealData.Services
+namespace Test.Library.Services
 {
     public static class CryptographyService
     {
