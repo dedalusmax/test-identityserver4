@@ -86,6 +86,7 @@ namespace Test.IdentityServer4.EFCustomStore.Persistence
 
             if (entity == null)
             {
+                entity = new Grant();
                 UpdateEntity(entity, grant);
                 _entityRepository.Insert(entity);
             } else

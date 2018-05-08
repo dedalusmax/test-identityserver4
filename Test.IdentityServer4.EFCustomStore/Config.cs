@@ -59,8 +59,8 @@ namespace Test.IdentityServer4.EFCustomStore
                     ClientName = "Admin Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
-                    RedirectUris = { "http://localhost:51989/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { "http://localhost:51989/swagger/" },
+                    RedirectUris = { "http://localhost:5005/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5005/swagger/" },
 
                     AllowedScopes =
                     {

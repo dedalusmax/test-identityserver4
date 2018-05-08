@@ -46,7 +46,7 @@ namespace Test.WebAPI.Swagger.RealData
                     var config = Configuration.GetSection("IdentityServer");
                     var identityUrl = config["Url"];
                     options.Authority = identityUrl;
-                    options.ApiName = "api:admin";
+                    options.ApiName = "api:system";
                     options.RequireHttpsMetadata = false;
                     options.SupportedTokens = SupportedTokens.Both;
                 });
@@ -72,7 +72,7 @@ namespace Test.WebAPI.Swagger.RealData
                          TokenUrl = identityUrl + "/connect/token",
                          Scopes = new Dictionary<string, string>()
                          {
-                             { "api:admin", "Admin API" }
+                             { "api:system", "Admin API" }
                          }
                      });
 

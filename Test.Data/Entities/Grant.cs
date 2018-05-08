@@ -21,7 +21,7 @@ namespace Test.Data.Entities
         [Required]
         public string Data { get; set; }
 
-        public DateTime Expiration { get; set; }
+        public DateTime? Expiration { get; set; }
 
         [Required]
         public string SubjectId { get; set; }

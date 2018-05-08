@@ -1,17 +1,15 @@
-﻿using IdentityModel;
+﻿using AutoMapper;
+using IdentityModel;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Test.Data;
-using Entities = Test.Data.Entities;
 using Test.Library.Services;
-using AutoMapper;
+using Entities = Test.Data.Entities;
 
 namespace Test.IdentityServer4.EFCustomStore.Persistence
 {
