@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Test.Data;
 using Entities = Test.Data.Entities;
 using Test.Library.Services;
+using AutoMapper;
 
 namespace Test.IdentityServer4.EFCustomStore.Persistence
 {
@@ -66,12 +67,21 @@ namespace Test.IdentityServer4.EFCustomStore.Persistence
                 .SingleOrDefaultAsync(s => s.ProviderName == provider && s.ProviderSubjectId == subjectId);
         }
 
-        public async Task<Entities.User> AutoProvisionUser(string provider, string subjectId, List<Claim> claims)
+        public async Task<Entities.User> AutoProvisionUser(string provider, string subjectId, List<Entities.Claim> claims)
         {
+            List<Claim> securityClaims = new List<Claim>();
+
+            foreach (Entities.Claim claim in claims)
+            {
+                var mappedClaim = Mapper.Map<Entities.Claim, Claim>(claim);
+
+                securityClaims.Add(mappedClaim);
+            }
+
             // create a list of claims that we want to transfer into our store
             var filtered = new List<Claim>();
 
-            foreach (var claim in claims)
+            foreach (var claim in securityClaims)
             {
                 // if the external system sends a display name - translate that to the standard OIDC name claim
                 if (claim.Type == ClaimTypes.Name)
@@ -115,6 +125,15 @@ namespace Test.IdentityServer4.EFCustomStore.Persistence
             // check if a display name is available, otherwise fallback to subject id
             var name = filtered.FirstOrDefault(c => c.Type == JwtClaimTypes.Name)?.Value ?? sub;
 
+            List<Entities.Claim> mappedClaims = new List<Entities.Claim>();
+
+            foreach (Claim claim in filtered)
+            {
+                var mappedClaim = Mapper.Map<Claim, Entities.Claim>(claim);
+
+                mappedClaims.Add(mappedClaim);
+            }
+
             // create new user
             var user = new Entities.User
             {
@@ -122,11 +141,12 @@ namespace Test.IdentityServer4.EFCustomStore.Persistence
                 UserName = name,
                 ProviderName = provider,
                 ProviderSubjectId = subjectId,
-                Claims = filtered
+                Claims = mappedClaims
             };
 
             // store it and give it back
             await SaveAppUser(user);
+
             return user;
         }
 

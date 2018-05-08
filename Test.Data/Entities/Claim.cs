@@ -3,10 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Test.Data.Entities
 {
-    public class Claim : IEntity, IClaim
+    public class Claim : IEntity
     {
         [Key]
         public long Id { get; set; }
+
+        public long UserId { get; set; }
 
         public virtual User User { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using Test.Data.Entities;
 
 namespace Test.Data
@@ -7,6 +8,8 @@ namespace Test.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Claim> Claims { get; set; }
+        public DbSet<Grant> Grants { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
@@ -19,6 +22,9 @@ namespace Test.Data
 
             modelBuilder.Entity<Role>()
                 .Property(r => r._Permissions).HasColumnName("Permissions");
+
+            modelBuilder.Entity<User>()
+                .HasMany(c => c.Claims);
 
             #region Defaults
 
@@ -52,7 +58,7 @@ namespace Test.Data
             #endregion
 
             #region Composite Keys
-
+            
             //modelBuilder.Entity<OrganisationMembership>()
             //    .HasOne<Organisation>(o => o.Organisation)
             //    .WithMany(u => u.OrganisationMembership)

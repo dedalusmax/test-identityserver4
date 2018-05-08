@@ -1,3 +1,4 @@
+using AutoMapper;
 using IdentityServer4;
 using IdentityServer4.Stores;
 using Microsoft.ApplicationInsights.Extensibility;
@@ -35,7 +36,7 @@ namespace Test.IdentityServer4.EFCustomStore
                 .AddInMemoryClients(Config.GetClients())
                 .AddProfileService<ProfileService>();
 
-            services.AddSingleton<IUserStore, UserStore>();
+            services.AddTransient<IUserStore, UserStore>();
             services.AddTransient<IPersistedGrantStore, PersistedGrantStore>();
 
             services.AddAuthentication()
@@ -45,6 +46,8 @@ namespace Test.IdentityServer4.EFCustomStore
                     options.ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com";
                     options.ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo";
                 });
+
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +86,8 @@ namespace Test.IdentityServer4.EFCustomStore
             // Register repositories
             services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
             services.AddScoped<IGenericRepository<Role>, GenericRepository<Role>>();
+            services.AddScoped<IGenericRepository<Grant>, GenericRepository<Grant>>();
+            services.AddScoped<IGenericRepository<Claim>, GenericRepository<Claim>>();
         }
     }
 }

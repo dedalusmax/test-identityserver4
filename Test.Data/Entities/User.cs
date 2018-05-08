@@ -8,7 +8,7 @@ namespace Test.Data.Entities
     {
         public User()
         {
-            Claims = new List<System.Security.Claims.Claim>();
+            Claims = new List<Claim>();
         }
 
         [Key]
@@ -55,7 +55,7 @@ namespace Test.Data.Entities
         [Required]
         public string ProviderSubjectId { get; set; }
 
-        public virtual List<System.Security.Claims.Claim> Claims { get; set; }
+        public virtual List<Claim> Claims { get; set; }
 }
 
 public enum Language

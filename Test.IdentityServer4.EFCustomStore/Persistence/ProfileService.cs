@@ -1,7 +1,10 @@
-﻿using IdentityServer4.Extensions;
+﻿using AutoMapper;
+using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Test.IdentityServer4.EFCustomStore.Persistence
@@ -22,7 +25,18 @@ namespace Test.IdentityServer4.EFCustomStore.Persistence
                 var user = await _userstore.FindBySubjectId(context.Subject.GetSubjectId());
                 if (user != null)
                 {
-                    context.AddRequestedClaims(user.Claims);
+                    var reqClaim = user.Claims;
+
+                    List<Claim> mappedClaims = new List<Claim>();
+
+                    foreach (Data.Entities.Claim claim in reqClaim)
+                    {
+                        var mappedClaim = Mapper.Map<Data.Entities.Claim, Claim>(claim);
+
+                        mappedClaims.Add(mappedClaim);
+                    }
+
+                    context.AddRequestedClaims(mappedClaims);
                 }
             }
             return;

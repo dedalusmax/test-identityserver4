@@ -1,4 +1,6 @@
-﻿using IdentityServer4.Models;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -22,45 +24,19 @@ namespace Test.IdentityServer4.EFCustomStore.Persistence
 
         public async Task<IEnumerable<PersistedGrant>> GetAllAsync(string subjectId)
         {
-            var grants = new List<PersistedGrant>();
-
-            grants = await _entityRepository
-                .AsReadOnly()
+            return await GetAllEntities(_entityRepository.AsReadOnly())
                 .Where(s => s.SubjectId == subjectId)
-                .Select(item => new PersistedGrant()
-                {
-                    Key = item.Key,
-                    ClientId = item.ClientId,
-                    CreationTime = item.CreationTime,
-                    Data = item.Data,
-                    Expiration = item.Expiration,
-                    SubjectId = item.SubjectId,
-                    Type = item.Type
-                })
+                .ProjectTo<PersistedGrant>()
                 .ToListAsync();
-
-            return grants;
         }
 
         public async Task<PersistedGrant> GetAsync(string key)
         {
-            PersistedGrant grant = null;
-
-            grant = await _entityRepository
+            var entity = await _entityRepository
                 .AsReadOnly()
-                .Select(item => new PersistedGrant()
-                {
-                    Key = item.Key,
-                    ClientId = item.ClientId,
-                    CreationTime = item.CreationTime,
-                    Data = item.Data,
-                    Expiration = item.Expiration,
-                    SubjectId = item.SubjectId,
-                    Type = item.Type
-                })
-                .SingleOrDefaultAsync(s => s.Key == key);
+                .SingleOrDefaultAsync(r => r.Key == key);
 
-            return grant;
+            return Mapper.Map<Grant, PersistedGrant>(entity);
         }
 
         public async Task RemoveAllAsync(string subjectId, string clientId)
@@ -110,7 +86,6 @@ namespace Test.IdentityServer4.EFCustomStore.Persistence
 
             if (entity == null)
             {
-                entity = new Grant();
                 UpdateEntity(entity, grant);
                 _entityRepository.Insert(entity);
             } else
@@ -123,15 +98,12 @@ namespace Test.IdentityServer4.EFCustomStore.Persistence
 
         private void UpdateEntity(Grant entity, PersistedGrant model)
         {
-            // TODO: here should mapper go along!
-            // Mapper.Map<TModel, TEntity>(model, entity);
-            entity.Key = model.Key;
-            entity.ClientId = model.ClientId;
-            entity.CreationTime = model.CreationTime;
-            entity.Data = model.Data;
-            entity.Expiration = model.Expiration.Value;
-            entity.SubjectId = model.SubjectId;
-            entity.Type = model.Type;
+            Mapper.Map<PersistedGrant, Grant>(model, entity);
+        }
+
+        public virtual IQueryable<Grant> GetAllEntities(IQueryable<Grant> query)
+        {
+            return query;
         }
     }
 }
