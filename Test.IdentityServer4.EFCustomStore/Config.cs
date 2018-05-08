@@ -90,6 +90,27 @@ namespace Test.IdentityServer4.EFCustomStore
 
                 new Client
                 {
+                    ClientId = "js_demo",
+                    ClientName = "Demo JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    //RequireConsent = false,
+
+                    RedirectUris = { "http://localhost:5003/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
+                    AllowedCorsOrigins = { "http://localhost:5003" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api:system"
+                    }
+                },
+
+                new Client
+                {
                     ClientId = "mvc",
                     ClientName = "McGuireV10.com",
                     ClientUri = "http://localhost:5002",
