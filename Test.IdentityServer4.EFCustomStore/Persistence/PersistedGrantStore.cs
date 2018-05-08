@@ -99,7 +99,7 @@ namespace Test.IdentityServer4.EFCustomStore.Persistence
 
         private void UpdateEntity(Grant entity, PersistedGrant model)
         {
-            Mapper.Map<PersistedGrant, Grant>(model, entity);
+            Mapper.Map(model, entity);
         }
 
         public virtual IQueryable<Grant> GetAllEntities(IQueryable<Grant> query)

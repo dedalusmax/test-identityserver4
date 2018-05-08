@@ -22,7 +22,7 @@ namespace Test.WebAPI.Swagger.RealData
                 operation.Security = new List<IDictionary<string, IEnumerable<string>>>();
                 operation.Security.Add(new Dictionary<string, IEnumerable<string>>
             {
-                    { "oauth2", new[] { "api:admin" } }
+                    { "oauth2", new[] { "api:system" } }
             });
             }
         }

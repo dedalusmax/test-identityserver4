@@ -8,7 +8,6 @@ namespace Test.Library
     {
         public MappingProfile()
         {
-            // TO DO: migrate Grant entity with a nullable expiration property
             CreateMap<PersistedGrant, Entities.Grant>()
                 .ForMember(_ => _.Id, _ => _.Ignore());
         }
