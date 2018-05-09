@@ -1,18 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using IdentityServer4.AccessTokenValidation;
-using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 using Newtonsoft.Json;
-using System;
-using System.IO;
+using Swashbuckle.AspNetCore.Swagger;
+using System.Collections.Generic;
 
-namespace Test.WebAPI.Swagger
+namespace Test.WebAPI.Swagger.ClientCredentials
 {
     public class Startup
     {
@@ -23,39 +18,6 @@ namespace Test.WebAPI.Swagger
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-            app.UseAuthentication();
-
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.DocExpansion(DocExpansion.None);
-                c.OAuthClientId("adminswaggerui");
-                c.OAuthAppName("Admin Swagger UI");
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
-            });
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseCors(options =>
-            {
-                options.AllowAnyOrigin();
-                options.AllowAnyMethod();
-                options.AllowAnyHeader();
-            });
-
-            app.UseMvc();
-        }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
@@ -69,8 +31,7 @@ namespace Test.WebAPI.Swagger
                       });
             });
 
-            services
-                .AddMvc()
+            services.AddMvc()
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -93,7 +54,6 @@ namespace Test.WebAPI.Swagger
                     options.SupportedTokens = SupportedTokens.Both;
                 });
 
-            // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 var config = Configuration.GetSection("IdentityServer");
@@ -106,7 +66,7 @@ namespace Test.WebAPI.Swagger
                      new OAuth2Scheme
                      {
                          Type = "oauth2",
-                         Flow = "implicit",
+                         Flow = "application",
                          AuthorizationUrl = identityUrl + "/connect/authorize",
                          TokenUrl = identityUrl + "/connect/token",
                          Scopes = new Dictionary<string, string>()
@@ -117,9 +77,47 @@ namespace Test.WebAPI.Swagger
 
                 c.OperationFilter<AuthorizeCheckOperationFilter>();
                 c.DescribeAllEnumsAsStrings();
+
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "oauth2", new[] { "api:system" } }
+                });
             });
 
             services.AddMvc();
+        }
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            app.UseAuthentication();
+
+            app.UseSwagger();
+
+
+            app.UseSwaggerUI(c =>
+            {
+                c.DocExpansion(DocExpansion.None);
+                c.OAuthClientId("adminswaggerui");
+                c.OAuthAppName("Admin Swagger UI");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
+            });
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            //app.UseCors("AllowAllHeaders");
+
+            app.UseCors(options =>
+            {
+                options.AllowAnyOrigin();
+                options.AllowAnyMethod();
+                options.AllowAnyHeader();
+            });
+
+
+            app.UseMvc();
         }
     }
 }

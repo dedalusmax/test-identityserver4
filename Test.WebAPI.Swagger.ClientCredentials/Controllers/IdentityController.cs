@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-
-namespace Test.WebAPI.Swagger.Controllers
+namespace Test.WebAPI.Swagger.ClientCredentials.Controllers
 {
     [Route("api/v1/[controller]")]
     [Authorize]

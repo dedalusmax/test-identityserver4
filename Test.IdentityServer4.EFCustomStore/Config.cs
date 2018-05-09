@@ -55,12 +55,40 @@ namespace Test.IdentityServer4.EFCustomStore
 
                 new Client
                 {
+                    ClientId = "js_clientcredentials",
+
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { "http://localhost:5007/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5007/index.html" },
+                    AllowedCorsOrigins = { "http://localhost:5007" },
+
+                    // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    // scopes that client has access to
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api:system"
+                    }
+                },
+
+                new Client
+                {
                     ClientId = "adminswaggerui",
                     ClientName = "Admin Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
-                    RedirectUris = { "http://localhost:5005/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { "http://localhost:5005/swagger/" },
+                    RedirectUris = { "http://localhost:5001/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5001/swagger/" },
 
                     AllowedScopes =
                     {
