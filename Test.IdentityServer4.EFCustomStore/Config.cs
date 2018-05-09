@@ -75,9 +75,9 @@ namespace Test.IdentityServer4.EFCustomStore
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { "http://localhost:4203/home" },
-                    PostLogoutRedirectUris = { "http://localhost:4203" },
-                    AllowedCorsOrigins = { "http://localhost:4203" },
+                    RedirectUris = { "http://localhost:4202/login" },
+                    PostLogoutRedirectUris = { "http://localhost:4202" },
+                    AllowedCorsOrigins = { "http://localhost:4202" },
 
                     AllowedScopes =
                     {
