@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.WebAPI.Swagger.ClientC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.ConsoleApp.ClientCredentials", "Test.ConsoleApp.ClientCredentials\Test.ConsoleApp.ClientCredentials.csproj", "{55E13B1D-25A2-4168-80F4-1B41B300F9CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.JavaScriptClient.ClientCredentials", "Test.JavaScriptClient.ClientCredentials\Test.JavaScriptClient.ClientCredentials.csproj", "{F1273CA4-62E6-4FA6-A20D-D8403DA3D4CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.JavaScriptClient.ClientCredentials", "Test.JavaScriptClient.ClientCredentials\Test.JavaScriptClient.ClientCredentials.csproj", "{F1273CA4-62E6-4FA6-A20D-D8403DA3D4CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.IdentityServer4.EFConfigStore", "Test.IdentityServer4.EFConfigStore\Test.IdentityServer4.EFConfigStore.csproj", "{744334A8-0311-4060-8986-08BC59CFB4ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +105,10 @@ Global
 		{F1273CA4-62E6-4FA6-A20D-D8403DA3D4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1273CA4-62E6-4FA6-A20D-D8403DA3D4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1273CA4-62E6-4FA6-A20D-D8403DA3D4CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{744334A8-0311-4060-8986-08BC59CFB4ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{744334A8-0311-4060-8986-08BC59CFB4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{744334A8-0311-4060-8986-08BC59CFB4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{744334A8-0311-4060-8986-08BC59CFB4ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +128,7 @@ Global
 		{38199794-B44E-467E-B78C-51932786DB1A} = {81754631-B28C-463F-A884-23BF7DB1F3E5}
 		{55E13B1D-25A2-4168-80F4-1B41B300F9CC} = {AF0407D3-DD20-4B3E-A12C-865ED327DC77}
 		{F1273CA4-62E6-4FA6-A20D-D8403DA3D4CF} = {AF0407D3-DD20-4B3E-A12C-865ED327DC77}
+		{744334A8-0311-4060-8986-08BC59CFB4ED} = {AC58F4AF-EE72-4AE0-9A47-A42BDB0CC8DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94C6F611-BB84-474F-8644-1B60648D01C2}
