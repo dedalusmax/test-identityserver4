@@ -116,6 +116,26 @@ namespace Test.IdentityServer4.EFCustomStore
                     }
                 },
 
+                 new Client
+                {
+                    ClientId = "js_angular_oidc_client",
+                    ClientName = "Angular Admin JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { "http://localhost:4203/login" },
+                    PostLogoutRedirectUris = { "http://localhost:4203" },
+                    AllowedCorsOrigins = { "http://localhost:4203" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api:system"
+                    }
+                },
+
                 new Client
                 {
                     ClientId = "js_demo",
