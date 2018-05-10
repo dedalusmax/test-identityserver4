@@ -11,19 +11,9 @@ namespace Test.IdentityServer4.EFConfigStore
         {
             Console.Title = "IdentityServer4.EntityFramework";
 
-            var seed = args.Contains("/seed");
-            if (seed)
-            {
-                args = args.Except(new[] { "/seed" }).ToArray();
-            }
-
             var host = BuildWebHost(args);
 
-            if (seed)
-            {
-                SeedData.EnsureSeedData(host.Services);
-                return;
-            }
+            SeedData.EnsureSeedData(host.Services);
 
             host.Run();
         }
