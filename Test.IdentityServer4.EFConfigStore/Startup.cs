@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using IdentityServer4;
 using IdentityServer4.Quickstart.UI;
-using IdentityServer4.Stores;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

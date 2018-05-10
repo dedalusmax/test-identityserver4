@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using System;
-using System.Linq;
 
 namespace Test.IdentityServer4.EFConfigStore
 {
