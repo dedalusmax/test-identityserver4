@@ -89,6 +89,29 @@ namespace Test.IdentityServer4.EFCustomStore
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = { "http://localhost:5001/swagger/oauth2-redirect.html" },
                     PostLogoutRedirectUris = { "http://localhost:5001/swagger/" },
+                    AllowedCorsOrigins = { "http://localhost:5001"},
+
+                    AllowedScopes =
+                    {
+                        "api:system"
+                    }
+                },
+
+                 new Client
+                {
+                    ClientId = "adminswaggersecretui",
+                    ClientName = "Admin Swagger UI",
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = { "http://localhost:5001/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5001/swagger/" },
+                    AllowedCorsOrigins = { "http://localhost:5001"},
+
+                     // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
 
                     AllowedScopes =
                     {
@@ -132,6 +155,32 @@ namespace Test.IdentityServer4.EFCustomStore
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
+                        "api:system"
+                    }
+                },
+
+                   new Client
+                {
+                    ClientId = "js_angular_oauth_client",
+                    ClientName = "Angular Admin JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { "http://localhost:4204/login" },
+                    PostLogoutRedirectUris = { "http://localhost:4204" },
+                    AllowedCorsOrigins = { "http://localhost:4204"},
+
+                    // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("SENG".Sha256())
+                    },
+
+                    AllowedScopes =
+                    {
+                        //IdentityServerConstants.StandardScopes.OpenId,
+                        //IdentityServerConstants.StandardScopes.Profile,
+                        //IdentityServerConstants.StandardScopes.Email,
                         "api:system"
                     }
                 },
