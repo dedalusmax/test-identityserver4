@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Test.IdentityServer4.EFConfigStore.Data;
-using Test.IdentityServer4.EFConfigStore.Data.Entities;
+using Test.IdentityServer4.EFStores.Data;
+using Test.IdentityServer4.EFStores.Data.Entities;
 
 namespace Test.IdentityServer4.EFStores.Persistence
 {
