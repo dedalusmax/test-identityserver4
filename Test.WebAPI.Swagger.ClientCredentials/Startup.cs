@@ -97,7 +97,7 @@ namespace Test.WebAPI.Swagger.ClientCredentials
             app.UseSwaggerUI(c =>
             {
                 c.DocExpansion(DocExpansion.None);
-                c.OAuthClientId("adminswaggerui");
+                c.OAuthClientId("adminswaggersecretui");
                 c.OAuthAppName("Admin Swagger UI");
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
             });
