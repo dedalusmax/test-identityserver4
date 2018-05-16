@@ -83,7 +83,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Test.Angular5Client.ClientO
 		SlnRelativePath = "Test.Angular5Client.ClientOAuth2\"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.IdentityServer4.EFStores", "Test.IdentityServer4.EFStores\Test.IdentityServer4.EFStores.csproj", "{75372A86-08C7-4027-BEC5-F87046043789}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.IdentityServer4.EFStores", "Test.IdentityServer4.EFStores\Test.IdentityServer4.EFStores.csproj", "{75372A86-08C7-4027-BEC5-F87046043789}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.IdentityServer4.EFConfigStore", "Test.IdentityServer4.EFConfigStore\Test.IdentityServer4.EFConfigStore.csproj", "{D18E48AB-1AB8-42B1-8AE8-009DB47D1334}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,14 +157,14 @@ Global
 		{9EB59CB7-DBF2-489F-8D53-4CFAE9F54508}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EB59CB7-DBF2-489F-8D53-4CFAE9F54508}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{9EB59CB7-DBF2-489F-8D53-4CFAE9F54508}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{744334A8-0311-4060-8986-08BC59CFB4ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{744334A8-0311-4060-8986-08BC59CFB4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{744334A8-0311-4060-8986-08BC59CFB4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{744334A8-0311-4060-8986-08BC59CFB4ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75372A86-08C7-4027-BEC5-F87046043789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75372A86-08C7-4027-BEC5-F87046043789}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75372A86-08C7-4027-BEC5-F87046043789}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75372A86-08C7-4027-BEC5-F87046043789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D18E48AB-1AB8-42B1-8AE8-009DB47D1334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D18E48AB-1AB8-42B1-8AE8-009DB47D1334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D18E48AB-1AB8-42B1-8AE8-009DB47D1334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D18E48AB-1AB8-42B1-8AE8-009DB47D1334}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -184,8 +186,8 @@ Global
 		{F1273CA4-62E6-4FA6-A20D-D8403DA3D4CF} = {AF0407D3-DD20-4B3E-A12C-865ED327DC77}
 		{40F97E57-07D8-4E13-BF59-4F62FBB2164E} = {AF0407D3-DD20-4B3E-A12C-865ED327DC77}
 		{9EB59CB7-DBF2-489F-8D53-4CFAE9F54508} = {AF0407D3-DD20-4B3E-A12C-865ED327DC77}
-		{744334A8-0311-4060-8986-08BC59CFB4ED} = {AC58F4AF-EE72-4AE0-9A47-A42BDB0CC8DF}
 		{75372A86-08C7-4027-BEC5-F87046043789} = {AC58F4AF-EE72-4AE0-9A47-A42BDB0CC8DF}
+		{D18E48AB-1AB8-42B1-8AE8-009DB47D1334} = {AC58F4AF-EE72-4AE0-9A47-A42BDB0CC8DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94C6F611-BB84-474F-8644-1B60648D01C2}
